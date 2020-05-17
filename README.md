@@ -1,0 +1,1 @@
+# bim-s-blog
