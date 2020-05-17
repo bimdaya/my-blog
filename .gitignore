@@ -1,0 +1,25 @@
+# dependencies
+/node_modules
+.next/
+
+# production
+/dist
+
+# misc
+.DS_Store
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# debug
+
+yarn-debug.log*
+yarn-error.log*
+
+# editors
+
+.idea
+*.iws
+*.iml
+.vscode
