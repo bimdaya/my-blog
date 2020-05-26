@@ -1,8 +1,6 @@
-import { withRouter } from 'next/router';
-
 import Post from '../../src/components/Post';
 import { getPostBySlug } from '../../lib/getPosts';
-import markdownToHtml from '../../lib/markdownToHtml';
+import markdownToHtml from '../../lib/markDownToHtml';
 import ErrorPage from '../../src/ErrorPage';
 
 const PostPage = (props) => {
