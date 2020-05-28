@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`markdownToHtml() Returns string of HTML tags 1`] = `
+exports[`markDownToHtml() Returns string of HTML tags 1`] = `
 "<h2>Test Assertion</h2>
 "
 `;

@@ -2,7 +2,7 @@ import { withRouter } from 'next/router';
 
 import Post from '../../src/components/Post';
 import { getPostBySlug } from '../../lib/getPosts';
-import markdownToHtml from '../../lib/markdownToHtml';
+import markDownToHtml from '../../lib/markDownToHtml';
 import ErrorPage from '../../src/ErrorPage';
 
 const PostPage = (props) => {
@@ -29,7 +29,7 @@ export async function getServerSideProps(req) {
       const post = await getPostBySlug(`${slug}.md`);
 
       if (post) {
-        post.content = await markdownToHtml(post.content || '');
+        post.content = await markDownToHtml(post.content || '');
       }
 
       return { props: { post: { ...post } } };
@@ -47,7 +47,7 @@ export async function getServerSideProps(req) {
 //   const post = await getPostBySlug(`${params.slug}.md`);
 
 //   if (post) {
-//     post.content = await markdownToHtml(post.content || '');
+//     post.content = await markDownToHtml(post.content || '');
 //   }
 
 //   return {
