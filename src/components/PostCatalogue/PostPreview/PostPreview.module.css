@@ -1,0 +1,14 @@
+.post_name {
+  text-decoration: none !important;
+  color: beige;
+  font-size: 1vw;
+}
+
+.post_description {
+  font-size: 1vw;
+}
+
+.post_margin {
+  margin-bottom: 45px;
+  margin-top: 90px;
+}

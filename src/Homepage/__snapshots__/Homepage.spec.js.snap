@@ -1,0 +1,7 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Homepage renders 1`] = `
+<h1>
+  Bim's Blog
+</h1>
+`;

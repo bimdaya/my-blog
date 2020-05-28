@@ -1,0 +1,46 @@
+{
+  "name": "react-next-boilerplate",
+  "version": "1.2.0",
+  "main": "index.js",
+  "scripts": {
+    "dev": "next",
+    "build": "next build",
+    "start": "next start",
+    "test": "jest"
+  },
+  "dependencies": {
+    "@babel/preset-env": "^7.9.6",
+    "express": "^4.17.1",
+    "fs": "^0.0.1-security",
+    "gray-matter": "^4.0.2",
+    "next": "^9.3.5",
+    "prop-types": "^15.7.2",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "react-redux": "7.0.2",
+    "redux": "4.0.1",
+    "remark": "^12.0.0",
+    "remark-html": "^11.0.1"
+  },
+  "devDependencies": {
+    "@testing-library/jest-dom": "^5.5.0",
+    "@testing-library/react": "^10.0.4",
+    "babel-jest": "^26.0.1",
+    "jest": "^26.0.1",
+    "jest-dom": "^4.0.0"
+  },
+  "jest": {
+    "setupFilesAfterEnv": [
+      "<rootDir>/config/setupTests.js"
+    ],
+    "transform": {
+      "^.+\\.(t|j)s$": "babel-jest"
+    },
+    "transformIgnorePatterns": [
+      "[/\\\\]node_modules[/\\\\].+\\.(js|jsx)$"
+    ],
+    "moduleNameMapper": {
+      "\\.(css|less|scss|sass)$": "identity-obj-proxy"
+    }
+  }
+}
