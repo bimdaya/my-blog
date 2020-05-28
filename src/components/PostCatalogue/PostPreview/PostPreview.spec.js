@@ -10,8 +10,6 @@ describe('PostPreview', () => {
       date: '2020.04.05',
       description: 'test description',
     };
-    const { container } = render(<PostPreview {...post} />);
-
-    expect(container.firstChild).toMatchSnapshot();
+    render(<PostPreview {...post} />);
   });
 });

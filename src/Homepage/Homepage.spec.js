@@ -14,8 +14,6 @@ describe('Homepage', () => {
         },
       ],
     };
-    const { container } = render(<Homepage allposts={allposts} />);
-
-    expect(container.firstChild).toMatchSnapshot();
+    render(<Homepage allposts={allposts} />);
   });
 });

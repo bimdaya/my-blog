@@ -4,9 +4,7 @@ import PostList from './PostCatalogue';
 
 describe('PostList', () => {
   it('renders without passing posts', () => {
-    const { container } = render(<PostList />);
-
-    expect(container.firstChild).toMatchSnapshot();
+    render(<PostList />);
   });
 
   it('renders when an array of posts are passed', () => {
@@ -18,8 +16,6 @@ describe('PostList', () => {
         description: 'test description',
       },
     ];
-    const { container } = render(<PostList posts={posts} />);
-
-    expect(container.firstChild).toMatchSnapshot();
+    render(<PostList posts={posts} />);
   });
 });
