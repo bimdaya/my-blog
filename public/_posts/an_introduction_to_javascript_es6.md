@@ -3,288 +3,175 @@ title: 'An introduction to Javascript ES6'
 slug: 'an_introduction_to_javascript_es6'
 description: 'An Introduction to Javascript ES6'
 coverImage: '/assets/blog/preview/cover.jpg'
-date: '2020-03-20T05:35:07.322Z'
+date: '2020-03-20'
 ---
 
-A test is a code that throws an error when the actual result of something does not match the expected output.
+### Rest and Spread parameters
 
-## Test Assertion
+❌ Use multiple rest params in a function call
 
-An assertion library will help our test assertions read more like a phrase you might say which will help people understand our intentions better.
+❌ Use rest param as the first or middle input param in a function
 
-Ex:
+✅ Use rest param as the last input param in a function
 
-`function sum(a, b) { return a + b; }`
+❌ Initialize a default value
 
-```
-function expect(actual) {
-  return {
-    toBe(expected) {
-      if (actual !== expected) {
-        throw new Error(actual, \"is not equal to\" , expected)
-      }
-    }
-  }
+### let,const and var
+
+- ‘var’ declarations are initialized with ‘undefined’.
+
+- But for ‘let’ and ‘const’ the declarations remain uninitialized.
+
+- Therefore, you need to declare ‘let’ and ‘const’ variables before use.
+
+#### let
+
+‘let’ can only be accessed within a block scope.
+
+Consider the following function,
+
+‘id’ can be accessed within the function scope.
+
+Tried to log ‘id’ after function declaration. It gave an error since the ‘id’ is not initialized.
+
+it’s good to go after the ‘id’ is initialized in the upper scope.
+
+const
+‘const’ needs to be initialized when declaring. Otherwise, it will throw an error.
+‘const’ values can not be re-assigned.
+
+We can initialize another ‘const’ value with the same name in an inner block scope. But the outer scope is unable to access the inner ‘const’ value.
+
+### Destructuring
+
+Following is an example of object destructuring in JS.
+
+In the cases where you want the destructured variable to have a different name than the property name, use an alias.
+
+Here c,s,e are aliases for city, state, and country.
+
+Default parameters
+The best practice is to use default values where possible.
+
+Default parameters are not immune to exceptions
+
+Rest parameters should not have a default value
+
+Swap variables
+Swapping variables is easy using an array.
+
+Destructuring arrays
+
+Array destructuring is pretty simple.
+
+But if you mess up the brackets, you’ll get ‘undefined’ as the value for most of the elements.
+
+Arrow function
+Introduction for arrow functions >>> https://zendev.com/2018/10/01/javascript-arrow-functions-how-why-when.html
+Arrow functions can never have duplicate named parameters, whether in strict or non-strict mode.
+Arrow functions can never be used as constructor functions. Therefore, they can never be invoked with the new keyword.
+
+A prototype property does not exist for an arrow function.
+
+However , it returns a prototype for ‘Object.getPrototypeOf()’.
+
+Dynamic imports
+https://2ality.com/2017/01/import-operator.html
+https://www.sitepoint.com/using-es-modules/
+
+Promise
+Create a new promise
+const promise = new Promise((resolve, reject) => {
+if (/_ everything works fine _/ true) {
+resolve('success');
+} else {
+reject(Error('Nooo'));
 }
-
-result = sum(3, 7)
-expected = 10
-expect(result).toBe(expected)
-```
-
-## Jest
-
-`describe()`
-
-- A Jest method for containing one or more related tests.
-- It takes two arguments: a string for describing the test suite and a callback function for wrapping the actual test
-
-```
-describe(\"function name\", () => {
-  // test cases
+return promise;
 });
-```
 
-### `test()`
+Promise States
 
-```
-function test(title, callback) {
-  try {
-    callback()
-  } catch (error) {
-    console.error(error)
-  }
+Resolve: operation completed successfully
+Reject: operation failed
+Pending: waiting for the operation to be completed
+Promise chaining
+then()
+catch()
+finally()
+
+Promise methods
+Promise.all()
+Wait for all promises to be resolved, or for any to be rejected.
+Promise.allsettled()
+Wait until all promises have settled (each may resolve or reject).
+Promise.race()
+Wait until one promise is done
+Promise.reject()
+Create a rejected promise
+Promise.resolve()
+Create a resolved promise
+
+Generators
+Consider the following example.
+function foo() {
+for (let i = 0; i < 1e11; i++) {
+console.log(i);
 }
-```
-
-```
-it(\"return something\", () => {
-    // actual test
-});
-```
-
-### `it()` vs `test()`
-
-it is an alias of test. So they are exactly the same.
-
-## Asynchronous Tests
-
-- Async tests can be written in two ways.
-- Return the Promise object from the test function
-  With `async/await` keywords
-
-```
-it('returns default intents when fetching fails', async () => {
-  expect.assertions(1);
-  const param = 'UK';
-  const apiUrl = 'http://tw.com';
-  const oauthToken = '1234';
-  axiosMock.get.mockImplementationOnce(() => Promise.reject());
-  await getAvailableIntentsByCountryOfResidence(oauthToken, param, apiUrl).catch(error => expect(error).toBe('Error'));
-});
-```
-
-- https://techblog.topdesk.com/coding/frontend-testing-with-jest-assertions-deep-dive/
-
-- https://www.pluralsight.com/guides/test-asynchronous-code-jest
-
-## Static Analysis Testing
-
-- Static code analysis is a method of debugging by examining source code before a program is run.
-- Linting is the process of running a program that will analyse code for potential errors.
-- ESLint is static code analysis and linting tool is a standard tool for Javascript projects.
-- By default, ESLint expects ECMAScript 5 syntax.
-
-### `.eslintrc`
-
-Example:
-
-```
-{
-  \"extends\": \"eslint:recommended\",
-  \"parserOptions\": {
-    \"ecmaVersion\": 2019,
-    \"sourceType\": \"module\",
-    \"ecmaFeatures\": {
-      \"jsx\": true
-    }
-  },
-  \"rules\": {
-    \"valid-typeof\": \"error\"
-  }
-}
-```
-
-- `parserOptions` override settings to enable support for other ECMAScript versions(other than ECMAScript 5) as well as JSX.
-- Rules : https://eslint.org/docs/rules/
-- Use pre-built ESLint Configuration using extends in config file
-
-### `.eslintignore`
-
-ESLint will ignore everything in `.eslintignore`
-
-Ex:
-
-```
-node_modules
-Dist
-```
-
-Or we could use the same `.gitignore` file and add the following lint command in our `package.json`.
-
-```
-{
-  ...
-  \"scripts\": {
-     \"build\": \"babel src --out-dir dist\",
-     \"lint\": \"eslint --ignore-path .gitignore\"
-   },
-  ...
 }
 
-```
+setTimeout(function() {
+console.log('Timeout!');
+}, 1);
 
-## Prettier
+foo();
 
-Prettier scans your files for style issues and automatically reformats your code to ensure consistent rules are being followed for indentation, spacing, semicolons, single quotes vs double quotes, etc.
+Here, it is obvious that ‘setTimeout()’ probably waits more than 1ms.
 
-## Mocking
+This problem is addressed by generators.
 
-“When running unit tests, you don’t want to actually make network requests or charge real credit cards. That could… get expensive… and also very, very slow. So instead of running your code exactly as it would run in production, you can modify how some of your JavaScript modules and functions work during tests to avoid test unreliability (flakiness) and improve the speed of your tests.”
+ex1:
+function* myGen(){} or function *myGen(){}
 
-### Mock Functions
-
-They let you spy on the behaviour of a function that is called indirectly by some other code, rather than only testing the output.
-jest.fn()
-Returns a new mock function
-
-Example:
-
-```
-// module cal
-export function add(a, b) {
-	return a + b;
+function\* myGen() {
+yield 1;
+yield 2;
+return 3;
 }
-```
 
-```
-//module main
-export function app(a, b) {
-	return add(a, b);
+const gen = myGen(); // returns a generator iterator
+gen.next(); // calls the generator return {value:1,done:false}
+gen.next(); // calls the generator return {value:2,done:false}
+gen.next(); // calls the generator return {value:3,done:true} generator is done
+gen.next(); // calls the generator return {value:undefined,done:true}
+
+If the generator returns true at any point, further execution will be stopped.
+
+ex2:
+
+function\* myGen() {
+yield 1;
+yield 2;
+yield 3;
+yield 4;
+yield 5;
+return 6;
 }
-```
 
-```
-//test case
-it(\"app() calls add()\", () => {
-	cal.add = jest.fn();
-      main.app(1,2);
-
-	expect(cal.add(1,2)).toHaveBeenCalledWith(1,2);
-});
-```
-
-```
-// what actually happens is,
-it(\"app() calls add()\", () => {
-      temp = cal.add;
-	cal.add = jest.fn();
-      main.app(1,2);
-
-
-	expect(cal.add(1,2)).toHaveBeenCalledWith(1,2);
-      cal.add = temp;
-});
-```
-
-### `jest.spyOn()`
-
-- Creates a mock function similar to jest.fn but leaves the original implementation in place.
-- Returns a Jest mock function.
-
-Example:
-
-```
-// module cal
-export function add(a, b) {
-	return a + b;
+for (const v of foo()) {
+console.log(v);
 }
-```
 
-```
-//module main
-export function app(a, b) {
-	return add(a, b);
-}
-```
+// output: 1,2,3,4,5
+// does not print 6
+// because done:true for 6
 
-```
-//test case
-it(\"app() calls add()\", () => {
-	const addMock = jest.spyOn(cal, \"add\");
+ex3:
+Initially we pass 5 as the value of x in foo(), hence x=5 in first genit.next().
+First genit.next() executes yield and returns {value:6, done:false}
 
-      // calls the original implementation
-      expect(main.app(1,2)).toEqual(3);
-      // to test whether add() is called and with correct params
-	expect(addMock(1,2)).toHaveBeenCalledWith(1,2);
-});
-```
+Second generator call sets x=12. At this point the first ‘yield’ is done. Therefore, it executes up to the next ‘yeild’ and returns {value:8, done:false}.
+Third generator call sets x=13. At this point the second ‘yield’ is done. Therefore, it looks for the next ‘yeild’. As it reaches the return statement, it returns {value:42, done:true}.
 
-### `jest.mock()`
-
-- Mock a module
-  Example:
-  https://github.com/transferwise/homepage/blob/c05979fcbacef4fca4194471d09098a6581bd30a/lib/getInitialState/getInitialState.spec.js
-
-- Make a shared JavaScript mock module
-  Mock the same file throughout all the tests in your codebase.
-  Use **mocks** directory which Jest can load for us automatically.
-
-## Jest CLI
-
-- Run watch mode:
-
-```
-jest --watch #runs jest -o by default
-jest --watchAll #runs all tests
-```
-
-- Run Only Relevant Jest Tests on Git Commit to Avoid Breakages
-
-- Jest is capable of running only the tests and linting only the files that are affected by the files we’re committing with husky and lint-staged to speed up our local test runs as well as help us avoid accidentally committing code that breaks our application.
-
-`npm install --save-dev husky lint-staged`
-
-```
-\"husky\": {
-    \"hooks\": {
-      \"pre-commit\": \"lint-staged && npm run build\"
-    }
-  },
-  \"lint-staged\": {
-    \"**/*.+(js|json|css|html|md)\": [
-      \"prettier\",
-      \"jest --findRelatedTests\",
-      \"git add\"
-    ]
-  },
-```
-
-- `lint-staged` : run only the tests that are recently changed
-- `jest --findRelatedTests` : find and run all the tests related to the updated files
-  When we do a commit it run husky
-  Snapshot Testing
-
-- “Snapshot tests are a very useful tool whenever you want to make sure your UI does not change unexpectedly.
-  A typical snapshot test case for a mobile app renders a UI component, takes a snapshot, then compares it to a reference snapshot file stored alongside the test. The test will fail if the two snapshots do not match: either the change is unexpected, or the reference snapshot needs to be updated to the new version of the UI component.”
-
-- Easy to compare small JS objects which does not update frequently
-  Avoid huge snapshots which will hard to maintain.
-
-## Cypress
-
-- Cypress is an incredibly powerful web testing tool. It’s capable of testing any web application. Its architecture places it a cut above similar end-to-end testing tools.
-
-https://docs.cypress.io/guides/getting-started/writing-your-first-test.html#Special-commands
-
-Example: https://github.com/transferwise/homepage/blob/master/cypress/integration/homepage.spec.js
+ES 6 compatibility Table
+https://kangax.github.io/compat-table/es6/

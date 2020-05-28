@@ -3,22 +3,21 @@ title: 'Javascript Testing Intro'
 slug: 'javascript_testing_intro'
 description: 'Discuss basic concepts of Javascript Testing'
 coverImage: '/assets/blog/preview/cover.jpg'
-date: '2020-03-10T05:35:07.322Z'
+date: '2020-03-10'
 ---
 
-A test is a code that throws an error when the actual result of something does not match the expected output. 
+A test is a code that throws an error when the actual result of something does not match the expected output.
 
-## Test Assertion 
-An assertion library will help our test assertions read more like a phrase you might say which will help people understand our intentions better. 
+## Test Assertion
 
-Ex: 
+An assertion library will help our test assertions read more like a phrase you might say which will help people understand our intentions better.
 
-`function sum(a, b) {
-	return a + b;
-}`
+Ex:
+
+`function sum(a, b) { return a + b; }`
 
 ```
-function expect(actual) {  
+function expect(actual) {
   return {
     toBe(expected) {
       if (actual !== expected) {
@@ -33,8 +32,8 @@ expected = 10
 expect(result).toBe(expected)
 ```
 
-
 ## Jest
+
 `describe()`
 
 - A Jest method for containing one or more related tests.
@@ -58,27 +57,24 @@ function test(title, callback) {
 }
 ```
 
-
 ```
 it(\"return something\", () => {
     // actual test
 });
 ```
 
-
 ### `it()` vs `test()`
+
 it is an alias of test. So they are exactly the same.
-
-
 
 ## Asynchronous Tests
 
 - Async tests can be written in two ways.
 - Return the Promise object from the test function
-With `async/await` keywords
+  With `async/await` keywords
 
 ```
-it('returns default intents when fetching fails', async () => { 
+it('returns default intents when fetching fails', async () => {
   expect.assertions(1);
   const param = 'UK';
   const apiUrl = 'http://tw.com';
@@ -92,17 +88,17 @@ it('returns default intents when fetching fails', async () => {
 
 - https://www.pluralsight.com/guides/test-asynchronous-code-jest
 
-
-
 ## Static Analysis Testing
+
 - Static code analysis is a method of debugging by examining source code before a program is run.
 - Linting is the process of running a program that will analyse code for potential errors.
 - ESLint is static code analysis and linting tool is a standard tool for Javascript projects.
 - By default, ESLint expects ECMAScript 5 syntax.
 
-
 ### `.eslintrc`
+
 Example:
+
 ```
 {
   \"extends\": \"eslint:recommended\",
@@ -123,17 +119,19 @@ Example:
 - Rules : https://eslint.org/docs/rules/
 - Use pre-built ESLint Configuration using extends in config file
 
-
 ### `.eslintignore`
+
 ESLint will ignore everything in `.eslintignore`
 
-Ex: 
+Ex:
+
 ```
 node_modules
 Dist
 ```
 
 Or we could use the same `.gitignore` file and add the following lint command in our `package.json`.
+
 ```
 {
   ...
@@ -145,32 +143,37 @@ Or we could use the same `.gitignore` file and add the following lint command in
 }
 
 ```
+
 ## Prettier
 
 Prettier scans your files for style issues and automatically reformats your code to ensure consistent rules are being followed for indentation, spacing, semicolons, single quotes vs double quotes, etc.
 
-
 ## Mocking
+
 “When running unit tests, you don’t want to actually make network requests or charge real credit cards. That could… get expensive… and also very, very slow. So instead of running your code exactly as it would run in production, you can modify how some of your JavaScript modules and functions work during tests to avoid test unreliability (flakiness) and improve the speed of your tests.”
 
 ### Mock Functions
+
 They let you spy on the behaviour of a function that is called indirectly by some other code, rather than only testing the output.
 jest.fn()
 Returns a new mock function
 
-Example: 
+Example:
+
 ```
 // module cal
 export function add(a, b) {
 	return a + b;
 }
 ```
+
 ```
 //module main
 export function app(a, b) {
 	return add(a, b);
 }
 ```
+
 ```
 //test case
 it(\"app() calls add()\", () => {
@@ -180,6 +183,7 @@ it(\"app() calls add()\", () => {
 	expect(cal.add(1,2)).toHaveBeenCalledWith(1,2);
 });
 ```
+
 ```
 // what actually happens is,
 it(\"app() calls add()\", () => {
@@ -194,47 +198,49 @@ it(\"app() calls add()\", () => {
 ```
 
 ### `jest.spyOn()`
-- Creates a mock function similar to jest.fn but leaves the original implementation in place. 
+
+- Creates a mock function similar to jest.fn but leaves the original implementation in place.
 - Returns a Jest mock function.
 
 Example:
+
 ```
 // module cal
 export function add(a, b) {
 	return a + b;
 }
 ```
+
 ```
 //module main
 export function app(a, b) {
 	return add(a, b);
 }
 ```
+
 ```
 //test case
 it(\"app() calls add()\", () => {
 	const addMock = jest.spyOn(cal, \"add\");
-      
+
       // calls the original implementation
       expect(main.app(1,2)).toEqual(3);
-      // to test whether add() is called and with correct params 
+      // to test whether add() is called and with correct params
 	expect(addMock(1,2)).toHaveBeenCalledWith(1,2);
 });
 ```
 
-
 ### `jest.mock()`
 
 - Mock a module
-Example:
-https://github.com/transferwise/homepage/blob/c05979fcbacef4fca4194471d09098a6581bd30a/lib/getInitialState/getInitialState.spec.js
+  Example:
+  https://github.com/transferwise/homepage/blob/c05979fcbacef4fca4194471d09098a6581bd30a/lib/getInitialState/getInitialState.spec.js
 
 - Make a shared JavaScript mock module
-Mock the same file throughout all the tests in your codebase. 
-Use __mocks__ directory which Jest can load for us automatically.
+  Mock the same file throughout all the tests in your codebase.
+  Use **mocks** directory which Jest can load for us automatically.
 
 ## Jest CLI
-
 
 - Run watch mode:
 
@@ -262,26 +268,22 @@ jest --watchAll #runs all tests
       \"git add\"
     ]
   },
-  ```
-
-
+```
 
 - `lint-staged` : run only the tests that are recently changed
 - `jest --findRelatedTests` : find and run all the tests related to the updated files
-When we do a commit it run husky
-Snapshot Testing
+  When we do a commit it run husky
+  Snapshot Testing
 
 - “Snapshot tests are a very useful tool whenever you want to make sure your UI does not change unexpectedly.
-A typical snapshot test case for a mobile app renders a UI component, takes a snapshot, then compares it to a reference snapshot file stored alongside the test. The test will fail if the two snapshots do not match: either the change is unexpected, or the reference snapshot needs to be updated to the new version of the UI component.”
- 
+  A typical snapshot test case for a mobile app renders a UI component, takes a snapshot, then compares it to a reference snapshot file stored alongside the test. The test will fail if the two snapshots do not match: either the change is unexpected, or the reference snapshot needs to be updated to the new version of the UI component.”
+
 - Easy to compare small JS objects which does not update frequently
-Avoid huge snapshots which will hard to maintain.
- 
- 
+  Avoid huge snapshots which will hard to maintain.
+
 ## Cypress
 
-- Cypress is an incredibly powerful web testing tool. It’s capable of testing any web application. Its architecture places it a cut above similar end-to-end testing tools. 
-
+- Cypress is an incredibly powerful web testing tool. It’s capable of testing any web application. Its architecture places it a cut above similar end-to-end testing tools.
 
 https://docs.cypress.io/guides/getting-started/writing-your-first-test.html#Special-commands
 
