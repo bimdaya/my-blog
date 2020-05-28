@@ -1,6 +1,6 @@
 ---
 title: 'Mixpanel reducer() example'
-slug: 'mixpanel_reducer_example.md'
+slug: 'mixpanel_reducer_example'
 description: 'An example which describes how mixpanel reducer() wroks.'
 date: '2020-05-19'
 ---
