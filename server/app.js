@@ -19,7 +19,6 @@ const signale = new Signale(options);
   await app.prepare();
   const server = express();
 
-  //server.use(nextI18NextMiddleware(nextI18next));
   server.use('/static', express.static('public/static'));
 
   server.get('*', (req, res) => handle(req, res));
